@@ -36,18 +36,6 @@ public class GetUserTest {
         response.prettyPrint();
         ExtentLogger.logMessage(response.asPrettyString());
 
-//        assertThat(response.getStatusCode())
-//                .isEqualTo(HttpStatus.SC_OK);
-//
-//        assertThat(response.jsonPath().getMap("$").size())
-//                .isPositive()
-//                .as("validating size")
-//                .isLessThan(3);
-//        System.out.println("Size"+response.jsonPath().getMap("$").size());
-//        assertThat((response.jsonPath().getString("data.last_name")))
-//                .as("Comparing the last name in the response")
-//                .isEqualTo(lastname)
-//                .hasSizeBetween(3,20);
         ResponseAssert.assertThat(response)
                 .isStatusCode(HttpStatus.SC_OK)
                 .hasResponseSize(3)
