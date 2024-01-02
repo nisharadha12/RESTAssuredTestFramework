@@ -2,12 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="All Test Suite">
     <listeners>
-        <listener class-name="com.apiframework.listeners.TestListener"></listener>
+        <listener class-name="com.apiframework.listeners.TestListener"/>
     </listeners>
     <test verbose="2" thread-count="1" name="D:/spring/RestTesting/RESTAssuredTestFramework">
         <classes>
-            <class name="com.apitests.GetUserTest"></class>
-            <class name="com.apitests.CreateUserTest">
+            <class name="com.apitests.tests.GetUserTest"/>
+            <class name="com.apitests.tests.CreateUserTest">
             </class>
         </classes>
     </test>

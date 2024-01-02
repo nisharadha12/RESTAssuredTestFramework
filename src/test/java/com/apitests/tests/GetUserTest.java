@@ -1,15 +1,15 @@
-package com.apitests;
+package com.apitests.tests;
 
 import com.apiframework.annotations.FrameworkAnnotation;
 import com.apiframework.builder.RequestBuilder;
 import com.apiframework.constants.RequestEndPoints;
 import com.apiframework.reports.ExtentLogger;
+import com.apitests.assertions.ResponseAssert;
 import io.restassured.response.Response;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class GetUserTest {
 
@@ -21,8 +21,9 @@ public class GetUserTest {
                 .get(RequestEndPoints.getGetUserEndPoint());
 
         ExtentLogger.logMessage(response.asPrettyString());
-        assertThat(response.getStatusCode())
-                .isEqualTo(HttpStatus.SC_OK);
+
+        ResponseAssert.assertThat(response)
+                        .isStatusCode(HttpStatus.SC_OK);
 
     }
 
@@ -35,18 +36,23 @@ public class GetUserTest {
         response.prettyPrint();
         ExtentLogger.logMessage(response.asPrettyString());
 
-        assertThat(response.getStatusCode())
-                .isEqualTo(HttpStatus.SC_OK);
+//        assertThat(response.getStatusCode())
+//                .isEqualTo(HttpStatus.SC_OK);
+//
+//        assertThat(response.jsonPath().getMap("$").size())
+//                .isPositive()
+//                .as("validating size")
+//                .isLessThan(3);
+//        System.out.println("Size"+response.jsonPath().getMap("$").size());
+//        assertThat((response.jsonPath().getString("data.last_name")))
+//                .as("Comparing the last name in the response")
+//                .isEqualTo(lastname)
+//                .hasSizeBetween(3,20);
+        ResponseAssert.assertThat(response)
+                .isStatusCode(HttpStatus.SC_OK)
+                .hasResponseSize(3)
+                .hasLastName(lastname);
 
-        assertThat(response.jsonPath().getMap("$").size())
-                .isPositive()
-                .as("validating size")
-                .isLessThan(30);
-
-        assertThat((response.jsonPath().getString("data.last_name")))
-                .as("Comparing the last name in the response")
-                .isEqualTo(lastname)
-                .hasSizeBetween(3,20);
     }
 
     @DataProvider
